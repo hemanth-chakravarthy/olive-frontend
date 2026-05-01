@@ -8,8 +8,8 @@ if (!fs.existsSync(distPath)) {
   fs.mkdirSync(distPath, { recursive: true });
 }
 
-// These hashes match the current build output
-const mainScript = '/assets/index-DMaieEr_.js';
+// Switching to the smaller index file as the potential entry point
+const mainScript = '/assets/index-lIp6PP_2.js';
 const mainStyles = '/assets/styles-UIFYZ0Xn.css';
 
 const html = `<!DOCTYPE html>
@@ -19,18 +19,6 @@ const html = `<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Olive — The Safest Way to Shop for Groceries</title>
   <link rel="stylesheet" href="${mainStyles}">
-  <script>
-    // Mock TanStack Router hydration state to prevent "Invariant failed"
-    window.__TSR_DEHYDRATED__ = {
-      data: [],
-      manifest: {
-        routes: {
-          root: { id: 'root', path: '/' },
-          index: { id: 'index', path: '/', parentId: 'root' }
-        }
-      }
-    };
-  </script>
 </head>
 <body>
   <div id="root"></div>
@@ -39,4 +27,4 @@ const html = `<!DOCTYPE html>
 </html>`;
 
 fs.writeFileSync(indexPath, html);
-console.log('Successfully created production-ready index.html in dist/client');
+console.log('Successfully updated index.html with potential correct entry point');
