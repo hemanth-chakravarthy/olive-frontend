@@ -11,6 +11,9 @@ export default defineConfig({
     tailwindcss(),
     tsconfigPaths(),
   ],
+  build: {
+    outDir: "dist/client",
+  },
   resolve: {
     alias: {
       "@": "/src",
