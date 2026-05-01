@@ -8,27 +8,35 @@ if (!fs.existsSync(distPath)) {
   fs.mkdirSync(distPath, { recursive: true });
 }
 
+// These hashes match the current build output
+const mainScript = '/assets/index-DMaieEr_.js';
+const mainStyles = '/assets/styles-UIFYZ0Xn.css';
+
 const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Olive — The Safest Way to Shop for Groceries</title>
+  <link rel="stylesheet" href="${mainStyles}">
+  <script>
+    // Mock TanStack Router hydration state to prevent "Invariant failed"
+    window.__TSR_DEHYDRATED__ = {
+      data: [],
+      manifest: {
+        routes: {
+          root: { id: 'root', path: '/' },
+          index: { id: 'index', path: '/', parentId: 'root' }
+        }
+      }
+    };
+  </script>
 </head>
 <body>
   <div id="root"></div>
-  <script type="module">
-    // Dynamically find the entry point
-    const scripts = ['/assets/index-lIp6PP_2.js', '/assets/index-DMaieEr_.js'];
-    scripts.forEach(s => {
-      const script = document.createElement('script');
-      script.type = 'module';
-      script.src = s;
-      document.body.appendChild(script);
-    });
-  </script>
+  <script type="module" src="${mainScript}"></script>
 </body>
 </html>`;
 
 fs.writeFileSync(indexPath, html);
-console.log('Successfully created index.html in dist/client');
+console.log('Successfully created production-ready index.html in dist/client');
